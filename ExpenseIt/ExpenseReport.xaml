@@ -1,0 +1,78 @@
+﻿<Window x:Class="ExpenseIt.ExpenseReport"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExpenseIt"
+        mc:Ignorable="d"
+        Title="ExpenseIt - View Expense" Height="460" Width="800">
+    <Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox  Grid.Column="0" Name="usernameBox"   HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0,266,0,0" />
+            <Label Name="usernameLabel"  Content="Username:" Grid.Column="0" HorizontalAlignment="Left" Height="26"  VerticalAlignment="Top" Width="81" Margin="71,262,0,0"/>
+            <PasswordBox Grid.Column="0" Name="passwordBox"   HorizontalAlignment="Center"   VerticalAlignment="Top" Width="120" Margin="0,306,0,0" />
+            <Label Name="passwordLabel" Content="Password:" Grid.Column="0" HorizontalAlignment="Left" Height="26"  VerticalAlignment="Top" Width="81" Margin="71,302,0,0"/>
+
+            <Button Name="loginButton" Content="Login" HorizontalAlignment="Center" Margin="0,355,0,0" VerticalAlignment="Top" Width="180" Height="19" Click="Button_Click"/>
+
+            <Button x:Name="NewButton" Content="PAY ALL" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0,393,0,0" VerticalAlignment="Top" Width="180" Height="19" Click="NewButton_Click"/>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Foreground="#FF034BAD" FontWeight="Bold" >View Expense Report</Label>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="17*"/>
+                        <RowDefinition Height="13*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label  Grid.Column="0" FontSize="15" FontWeight="Bold" Grid.RowSpan="2">Name:</Label>
+                    <Label Content="{Binding Path=Name}" Grid.Column="1" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" Width="200" Grid.RowSpan="2"></Label>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" FontSize="15" FontWeight="Bold">Department:</Label>
+                    <Label Content="{Binding Path=Department}" Grid.Column="1" FontSize="15" FontWeight="Bold"></Label>
+                </Grid>
+
+                <DataGrid x:Name ="dataGridColumns" Grid.Row="3" ItemsSource="{Binding Path=Expenses}"
+                        AutoGenerateColumns="False" RowHeaderWidth="0"  Grid.Column="1" >
+                    <DataGrid.Columns >
+                        <DataGridTextColumn Header="ExpenseType" Binding="{Binding Path=ExpenseType}" />
+                        <DataGridTextColumn Header="Amount" Binding="{Binding Path=ExpenseAmount}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Grid>
+            <Label Content="Your Amount: " Name="amountLabel"  Visibility="Collapsed" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.132,0.31"/>
+            <Label Name="moneyLabel" Content="{Binding Path=Amount}"  Visibility="Collapsed"  HorizontalAlignment="Left" Margin="95,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.2,0.804"/>
+
+
+        </Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="watermark.png"/>
+
+
+
+        </Grid.Background>
+    </Grid>
+</Window>
